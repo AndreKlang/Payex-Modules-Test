@@ -3,7 +3,6 @@
         "phpunit/phpunit": "*",
         "phpmd/phpmd" : "*",
         "squizlabs/php_codesniffer": "*",
-        "sebastian/phpcpd": "*",
-        "satooshi/php-coveralls": "dev-master"
+        "sebastian/phpcpd": "*"
     }
 }
