@@ -26,6 +26,7 @@ install:
   - mv PartPayment module/
   - mv modman module/
   - mv MasterPass module/
+  - ls module/
   - cp -f .travis/composer.json composer.json
   - composer install --dev
   - curl https://gordonlesti.com/"$MAGE".tar.gz | tar xz
@@ -50,7 +51,7 @@ before_script:
   - ls
 
 script:
-  - php vendor/bin/phpcs --standard=Zend -n module/
+  - php vendor/bin/phpcs --colors --standard=Zend -n module/
   - php vendor/bin/phpmd module/ text codesize,design,unusedcode
   - php vendor/bin/phpcpd module/
   - cd magento && php ../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml && cd ..
