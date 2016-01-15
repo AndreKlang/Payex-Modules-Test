@@ -38,9 +38,9 @@ before_script:
   - ls
 
 script:
-  - php vendor/bin/phpcs --standard=Zend -n magento/app/
-  - php vendor/bin/phpmd magento/app/ text codesize,design,unusedcode
-  - php vendor/bin/phpcpd magento/app/
+  - php vendor/bin/phpcs --standard=Zend -n magento/.modman/Payex-Modules-Test
+  - php vendor/bin/phpmd magento/.modman/Payex-Modules-Test text codesize,design,unusedcode
+  - php vendor/bin/phpcpd magento/.modman/Payex-Modules-Test
   - cd magento && php ../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml && cd ..
 
 #after_script:
