@@ -4,7 +4,7 @@ sudo: false
 
 php:
   - 5.4
-  - 5.5
+#  - 5.5
 
 env:
   - MAGE=magento-1-9-1-0
@@ -14,6 +14,18 @@ env:
 #  - MAGE=magento-1-5-1-0
 
 install:
+  - mkdir module
+  - mv WyWallet module/
+  - mv Factoring module/
+  - mv GetAddress module/
+  - mv Payex module/
+  - mv Shared module/
+  - mv Autopay module/
+  - mv Bankdebit module/
+  - mv Payexapi module/
+  - mv PartPayment module/
+  - mv modman module/
+  - mv MasterPass module/
   - cp -f .travis/composer.json composer.json
   - composer install --dev
   - curl https://gordonlesti.com/"$MAGE".tar.gz | tar xz
@@ -32,15 +44,15 @@ before_script:
   - mysql -utravis magento_test < magento/var/magento_test.sql
   - cd magento
   - ls
-  - ./modman link ./../../Payex-Modules-Test
+  - ./modman link ./../module
   - ./modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
   - cd ..
   - ls
 
 script:
-  - php vendor/bin/phpcs --standard=Zend -n magento/.modman/Payex-Modules-Test
-  - php vendor/bin/phpmd magento/.modman/Payex-Modules-Test text codesize,design,unusedcode
-  - php vendor/bin/phpcpd magento/.modman/Payex-Modules-Test
+  - php vendor/bin/phpcs --standard=Zend -n module/
+  - php vendor/bin/phpmd module/ text codesize,design,unusedcode
+  - php vendor/bin/phpcpd module/
   - cd magento && php ../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml && cd ..
 
 #after_script:
