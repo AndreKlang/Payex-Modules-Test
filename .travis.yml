@@ -31,14 +31,16 @@ before_script:
   - mysql -e 'create database `magento_test`;'
   - mysql -utravis magento_test < magento/var/magento_test.sql
   - cd magento
+  - ls
   - ./modman link ./../../Payex-Modules-Test
   - ./modman clone https://github.com/EcomDev/EcomDev_PHPUnit.git
   - cd ..
+  - ls
 
 script:
-  - php vendor/bin/phpcs --standard=Zend -n app/
-  - php vendor/bin/phpmd app/ text codesize,design,unusedcode
-  - php vendor/bin/phpcpd app/
+  - php vendor/bin/phpcs --standard=Zend -n magento/app/
+  - php vendor/bin/phpmd magento/app/ text codesize,design,unusedcode
+  - php vendor/bin/phpcpd magento/app/
   - cd magento && php ../vendor/bin/phpunit --coverage-clover ../build/logs/clover.xml && cd ..
 
 #after_script:
